@@ -1,0 +1,50 @@
+import numpy as np
+
+def C(n1,n2):
+  return np.factorial(n1)/(np.factorial(n2)*np.factorial(n1-n2))
+
+##########################################################################
+
+"Binomial Distribution"
+n1 = input("How many independent trials?: ")
+p1 = input("What is the probability of event?: ")
+x1 = input("How many events in n trials:? ")        #(x = 0,1,2,...,n)
+
+def binomial(n, p, x):
+  return C(n,x)*(p**(x))*((1-p)**(n-x))
+ 
+mean = n1*p1
+variance = (n1*p1)*(1-p1)
+
+print("The probability is: " + str(binomial(n1,p1,x1)))
+print("The mean is: " + str(mean))
+print("The variance is: " + str(variance))
+
+##########################################################################
+
+"Geometric Distribution"
+y = input("Number of nonevents that occur before the first event?: ")   #(y = 0,1,2,...)
+x = input("Number of trials to produce one event:? ")                   #(x = 1,2,3,...)
+p = input("What is the probability of event?: ")
+
+def geometric1(x, p):
+  if x = 0:
+    return 0
+  else:
+    return p*[(1-p)**(x-1)]
+mean = 1/p
+variance = (1-p)/p**2
+ 
+ 
+def geometric2(y, p):
+  return p*[(1-p)**(y)]
+mean = (1-p)/p
+varaiance = (1-p)/p**2
+
+print(str(geometric1(y,p)
+print(str(geometric1(y,p)))
+print(mean)
+print(variance)
+  
+######################################################################### 
+  

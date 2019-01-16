@@ -33,16 +33,16 @@ def binomial(n, p, x):
 "Inputs for variables"
 n1 = input("How many independent trials?: ")
 p1 = input("What is the probability of event?: ")
-e = input("Exact (type:e), At Most (type:m), At Least (type:l)?: ")
+e = input("Exact (type: e), At Most (type: m), At Least (type: l)?: ")
 
 if e == 'e':
-  x1 = input("How many events in n trials?: ")                     #(x = 0,1,2,...,n)
+  x1 = input("How many events (x) in the " + str(n1) + " independent trials?: ")                     #(x = 0,1,2,...,n)
   print("\nThe probability is: " + str(binomial(n1, p1, x1)))
 
 else:
   probability_list = []
-  first_value = int(input("Least Number of Events?: "))
-  last_value = int(input("Most Number of Events?: "))
+  first_value = int(input("Least number of events?: "))
+  last_value = int(input("Most number of events?: "))
   for i in range(first_value,last_value+1):
     p_x = binomial(n1,p1,i)
     probability_list.append(p_x)
@@ -140,11 +140,23 @@ def poisson(lambda1, x):
 
 "Inputs for variables"
 lambda1 = input("What is the constant rate of occurence?: )                 # lambda > 0
-x1 = input("Number of events in that constant rate of occurence?: ")        #(x = 0,1,2,...)
+e = input("Exact (type: e), At Most (type: m), At Least (type: l)?: ")
+
+if e == 'e':
+  x1 = input("Number of events (x) in that constant rate of occurence?: ")        #(x = 0,1,2,...)
+  print("\nThe probability is: " + str(poisson(lambda1, x1)))
+
+else:
+  probability_list = []
+  first_value = int(input("Least number of events?: "))
+  last_value = int(input("Most number of events?: "))
+  for i in range(first_value,last_value+1):
+    p_x = poisson(lambda1, i)
+    probability_list.append(p_x)
+
+  print("\nThe probability is: " + str(sum(probability_list)))
 
 mean = lambda1
 variance = lambda1
-
-print("\nThe probability is: " + str(poisson(lambda1, x1)))
 print("The mean is: " + str(mean))
 print("The variance is: " + str(variance)) 

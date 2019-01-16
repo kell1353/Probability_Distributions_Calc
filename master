@@ -118,16 +118,28 @@ def hypergeometric(N1, N2, n, x):
   return (C(N1, x)*C(N2, n-x))/C(N,n)
 
 "Inputs for variables"
+N = input("Population size?: ")    #Population size
 N1 = input("Number of events in a population?: ")
 N2 = input("Number of non-events in a population?: ")
-N = N1 + N2    #Population size
 n = input("Sample size?: ")
-x = input("Number of events in the sample size?: ")              #(max(0,n-(N+N1)) <= x <= min(n,N1)
+e = input("Exact (type: e), At Most (type: m), At Least (type: l)?: ")
+
+if e == 'e':
+  x = input("Number of events within the sample size?: ")              #(max(0,n-(N+N1)) <= x <= min(n,N1)
+  print("\nThe probability is: " + str(hypergeometric(N1, N2, n, x)))
+
+else:
+  probability_list = []
+  first_value = int(input("Least number of events within the sample size?: "))
+  last_value = int(input("Most number of events within the sample size?: "))
+  for i in range(first_value,last_value+1):
+    p_x = hypergeometric(N1, N2, n, i)
+    probability_list.append(p_x)
+
+  print("\nThe probability is: " + str(sum(probability_list)))
 
 mean = n*(N1/N)
 variance = n*((N-n)/(N-1))*(N1/N)*(N2/N)
-
-print("\nThe probability is: " + str(hypergeometric(N1, N2, n, x)))
 print("The mean is: " + str(mean))
 print("The variance is: " + str(variance))  
 

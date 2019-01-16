@@ -17,6 +17,10 @@ def uniform(a,b):
 mean = (a+b)/2
 variance = ((b-a)**2)/12
 
+print("The probability is: " + str(uniform(a,b)))
+print("The mean is: " + str(mean))
+print("The variance is: " + str(variance))
+
 ##########################################################################
 
 "Binomial Distribution"
@@ -80,3 +84,19 @@ variance = n*((N-n)/(N-1))*(N1/N)*(N2/N)
 print("The probability is: " + str(hypergeometric(N1, N2, n, x)))
 print("The mean is: " + str(mean))
 print("The variance is: " + str(variance))  
+
+########################################################################
+
+"Poisson Distribution"
+
+lambda1 = input("What is the constant rate of occurence?: )                  lambda > 0
+x1 = input("Number of events in that constant rate of occurence?: ")        #(x = 0,1,2,...)
+
+def poisson(lambda1, x):
+  return ((np.exp**(-lambda1))*(lambda1**x))/np.factorial(x)
+mean = lambda1
+variance = lambda1
+
+print("The probability is: " + str(poisson(lambda1, x1)))
+print("The mean is: " + str(mean))
+print("The variance is: " + str(variance)) 

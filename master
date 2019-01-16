@@ -9,15 +9,17 @@ def C(n1,n2):
 
 "Uniform Distribution"
 
-a1 = input("What is the smallest endpoint value?: ")
-b1 = input("What is the largest endpoint value?: ")             # b1<a1
-
 def uniform(a,b):
   return 1/(b-a)
-mean = (a+b)/2
-variance = ((b-a)**2)/12
 
-print("The probability is: " + str(uniform(a,b)))
+"Inputs for variables"
+a1 = input("What is the smallest endpoint value?: ")
+b1 = input("What is the largest endpoint value?: ")             # b > a
+
+mean = (a1+b1)/2
+variance = ((b1-a1)**2)/12
+
+print("The probability is: " + str(uniform(a1,b1)))
 print("The mean is: " + str(mean))
 print("The variance is: " + str(variance))
 
@@ -25,12 +27,14 @@ print("The variance is: " + str(variance))
 
 "Binomial Distribution"
 
-n1 = input("How many independent trials?: ")
-p1 = input("What is the probability of event?: ")
-x1 = input("How many events in n trials:? ")        #(x = 0,1,2,...,n)
-
 def binomial(n, p, x):
   return C(n,x)*(p**(x))*((1-p)**(n-x))
+
+"Inputs for variables"
+n1 = input("How many independent trials?: ")
+p1 = input("What is the probability of event?: ")
+x1 = input("How many events in n trials?: ")                     #(x = 0,1,2,...,n)
+
 mean = n1*p1
 variance = (n1*p1)*(1-p1)
 
@@ -40,28 +44,57 @@ print("The variance is: " + str(variance))
 
 ##########################################################################
 
-"Geometric Distribution"
+"Negative Binomial Distribution"
 
-y = input("Number of nonevents that occur before the first event?: ")   #(y = 0,1,2,...)
-x = input("Number of trials to produce one event:? ")                   #(x = 1,2,3,...)
-p = input("What is the probability of event?: ")
+def negative_binomial1(r, x, p):
+  return (C(x-1,r-1))*(p**r)*((1-p)**(x-r))
+
+def negative_binomial2(r, y, p):
+  return (C(y+r-1,r-1))*(p**r)*((1-p)**(y))
+
+"Inputs for variables"
+r1 = input("Number of events that occur before the first event?: ")    
+x1 = input("Number of trials to produce r events?: ")                               #(x = r,r+1,r+2,...)
+y1 = input("Number of non-events that occur before you observe one events?: ")      #(y = 0,1,2,...)
+p1 = input("What is the probability of event?: ")
+
+print(str(negative_binomial1(r1, x1, p1)))
+mean = r1/p1
+variance = (r1*(1-p1))/p1**2
+
+print(str(negative_binomial2(r1, y1, p1)))
+mean = (r1*(1-p1))/p1
+variance = (r1*(1-p1))/p1**2
+
+print(mean)
+print(variance)
+
+##########################################################################
+
+"Geometric Distribution"
 
 def geometric1(x, p):
   if x = 0:
     return 0
   else:
     return p*[(1-p)**(x-1)]
+
+ def geometric2(y, p):
+  return p*[(1-p)**(y)]
+
+"Inputs for variables"
+x = input("Number of trials to produce one event?: ")                                   #(x = r,r+1,r+2,...)
+y = input("Number of non-events that occur before you observe the first event?: ")      #(y = 0,1,2,...)
+p = input("What is the probability of event?: ")
+
+print(str(geometric1(x,p)))
 mean = 1/p
 variance = (1-p)/p**2
- 
- 
-def geometric2(y, p):
-  return p*[(1-p)**(y)]
+
+print(str(geometric1(y,p)))
 mean = (1-p)/p
 varaiance = (1-p)/p**2
 
-print(str(geometric1(y,p)
-print(str(geometric1(y,p)))
 print(mean)
 print(variance)
   
@@ -69,14 +102,16 @@ print(variance)
 
 "Hypergeometric Distribution"
 
+def hypergeometric(N1, N2, n, x):
+  return (C(N1, x)*C(N2, n-x))/C(N,n)
+
+"Inputs for variables"
 N1 = input("Number of events in a population?: ")
 N2 = input("Number of non-events in a population?: ")
 N = N1 + N2    #Population size
 n = input("Sample size?: ")
-x = input("Number of events in the sample size?: ")              #(max(0,n-(N+N1))<=x<=min(n,N1)
+x = input("Number of events in the sample size?: ")              #(max(0,n-(N+N1)) <= x <= min(n,N1)
 
-def hypergeometric(N1, N2, n, x):
-  return (C(N1, x)*C(N2, n-x))/C(N,n)
 mean = n*(N1/N)
 variance = n*((N-n)/(N-1))*(N1/N)*(N2/N)
 
@@ -88,11 +123,13 @@ print("The variance is: " + str(variance))
 
 "Poisson Distribution"
 
+def poisson(lambda1, x):
+  return ((np.exp**(-lambda1))*(lambda1**x))/np.factorial(x)
+
+"Inputs for variables"
 lambda1 = input("What is the constant rate of occurence?: )                  lambda > 0
 x1 = input("Number of events in that constant rate of occurence?: ")        #(x = 0,1,2,...)
 
-def poisson(lambda1, x):
-  return ((np.exp**(-lambda1))*(lambda1**x))/np.factorial(x)
 mean = lambda1
 variance = lambda1
 

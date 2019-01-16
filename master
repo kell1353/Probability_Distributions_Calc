@@ -46,7 +46,6 @@ y = input("Number of nonevents that occur before the first event?: ")   #(y = 0,
 x = input("Number of trials to produce one event:? ")                   #(x = 1,2,3,...)
 p = input("What is the probability of event?: ")
 
-
 def geometric1(x, p):
   if x = 0:
     return 0

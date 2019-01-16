@@ -25,3 +25,7 @@ If the random variable Y is the number of nonevents that occur before the first 
 
 The hypergeometric distribution is used for samples drawn from small populations, without replacement. 
 For example, you have a shipment of N televisions, where N1 are good (successes) and N2 are defective (failure). If you sample n televisions of N at random, without replacement, you can find the probability that exactly x of the n televisions are good.
+
+"""""""""""""""Poisson Distribution use:"""""""""""""""
+
+The Poisson distribution is a discrete distribution that models the number of events based on a constant rate of occurrence. The Poisson distribution can be used as an approximation to the binomial when the number of independent trials is large and the probability of success is small.

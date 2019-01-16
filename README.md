@@ -12,13 +12,18 @@ The uniform distribution characterizes data over an interval uniformly, with a a
 The binomial distribution is used to represent the number of events that occurs within n independent trials.
 
 
+"""""""""""""""Negative Binomial Distribution use:"""""""""""""""
+
+If the random variable X is the number of trials necessary to produce r events that each have probability p, then the probability mass function (PMF) of X is given by: the hypergeometric1 definition.
+
+If the random variable Y is the number of nonevents that occur before you observe the r events, which each have probability p, then the probability mass function (PMF) of Y is given by: the hypergeometric2 definition.
+
 
 """""""""""""""Geometric Distribution use:"""""""""""""""
 
 If the random variable X is the total number of trials necessary to produce one event with probability p, then the probability mass function (PMF) of X is given by: the geometric1 definition.
 
 If the random variable Y is the number of nonevents that occur before the first event (with probability p) is observed, then the probability mass function (PMF) of Y is given by: the geometric2 definition.
-
 
 
 """""""""""""""Hypergeometric Distribution use:"""""""""""""""

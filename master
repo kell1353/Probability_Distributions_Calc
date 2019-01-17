@@ -86,13 +86,10 @@ print(variance)
 "Geometric Distribution"
 
 def geometric1(x, p):
-  if x = 0:
-    return 0
-  else:
-    return p*[(1-p)**(x-1)]
+    return p*((1-p)**(x-1))
 
  def geometric2(y, p):
-  return p*[(1-p)**(y)]
+  return p*((1-p)**(y))
 
 "Inputs for variables"
 p = input("What is the probability of event?: ")

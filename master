@@ -117,7 +117,7 @@ if e == 'e' and Q == 'y':
 if (e == 'l' or e == 'g') and Q == 'x':
   probability_list = []
   first_value = int(input("Least number of events? (x > 0): "))                             
-  last_value = int(input("Most number of events?: "))
+  last_value = int(input("Most number of events? (x): "))
   for i in range(first_value,last_value+1):
     p_x = geometric1(i,p)
     probability_list.append(p_x)

@@ -33,21 +33,24 @@ def binomial(n, p, x):
 "Inputs for variables"
 n1 = input("How many independent trials?: ")
 p1 = input("What is the probability of event?: ")
-e = input("Exact (type: e), At Most (type: m), At Least (type: l)?: ")
+e = input("Is P(X=x) (type: e), Is P(X≤x) (type: l), Is P(X≥x) (type: g)?: ")
 
 if e == 'e':
   x1 = input("How many events (x) in the " + str(n1) + " independent trials?: ")                     #(x = 0,1,2,...,n)
   print("\nThe probability is: " + str(binomial(n1, p1, x1)))
 
-else:
+else:             # the CDF (Cumulative Distribution Function) solution
   probability_list = []
   first_value = int(input("Least number of events?: "))
   last_value = int(input("Most number of events?: "))
+  
   for i in range(first_value,last_value+1):
     p_x = binomial(n1,p1,i)
     probability_list.append(p_x)
-
-  print("\nThe probability is: " + str(sum(probability_list)))
+  if e == 'g':
+    print("\nThe probability is: " + str(1 - sum(probability_list)))
+  else:
+    print("\nThe probability is: " + str(sum(probability_list)))
   
 mean = n1*p1
 variance = (n1*p1)*(1-p1)
@@ -93,11 +96,11 @@ def geometric1(x, p):
 
 "Inputs for variables"
 p = input("What is the probability of event?: ")
-e = input("Exact (type: e), At Most (type: m), At Least (type: l)?: ")
-Q = input("If question is: Number of trials to produce one event? (x), or is:Number of non-events that occur before you observe the first event? (y): ")
+e = input("Is P(X=x) (type: e), Is P(X≤x) (type: l), Is P(X≥x) (type: g)?: ")
+Q = input("If question is: Number of trials to produce one event? (x), or is: Number of non-events that occur before you observe the first event? (y): ")
 
 if e == 'e' and Q == 'x':
-  x = input("Number of trials to produce one event?: ")                                   #(x = r,r+1,r+2,...)
+  x = input("Number of trials to produce one event?: ")                                   #(x = 1,2,3,...)
   print(str(geometric1(x,p)))
   mean = 1/p
   variance = (1-p)/p**2
@@ -110,33 +113,39 @@ if e == 'e' and Q == 'y':
   varaiance = (1-p)/p**2
   
   
-if (e == 'm' or e == 'l') and Q == 'x':
+# the CDF (Cumulative Distribution Function) solution  
+if (e == 'l' or e == 'g') and Q == 'x':
   probability_list = []
-  first_value = int(input("Least number of events?: "))
+  first_value = int(input("Least number of events? (x > 0): "))                             
   last_value = int(input("Most number of events?: "))
   for i in range(first_value,last_value+1):
     p_x = geometric1(i,p)
     probability_list.append(p_x)
-
-  print("\nThe probability is: " + str(sum(probability_list)))
+  if e == 'g':
+    print("\nThe probability is: " + str(1 - sum(probability_list)))
+  else:
+    print("\nThe probability is: " + str(sum(probability_list)))
   mean = 1/p
   variance = (1-p)/p**2
   
   
-if (e == 'm' or e == 'l') and Q == 'y':
+# the CDF (Cumulative Distribution Function) solution  
+if (e == 'l' or e == 'g') and Q == 'y':
   probability_list = []
   first_value = int(input("Least number of events?: "))
   last_value = int(input("Most number of events?: "))
   for i in range(first_value,last_value+1):
     p_x = geometric2(i,p)
     probability_list.append(p_x)
-
-  print("\nThe probability is: " + str(sum(probability_list)))
+  if e == 'g':
+    print("\nThe probability is: " + str(1 - sum(probability_list)))
+  else:
+    print("\nThe probability is: " + str(sum(probability_list)))
   mean = (1-p)/p
-  varaiance = (1-p)/p**2
+  variance = (1-p)/p**2
 
-print(mean)
-print(variance)
+print("The mean is: " + str(mean))
+print("The variance is: " + str(variance))
   
 ######################################################################### 
 
@@ -150,21 +159,24 @@ N = input("Population size?: ")                                       # Populati
 N1 = input("Number of events in a population?: ")
 N2 = N-N1                                                             # Number of non-events in a population 
 n = input("Sample size?: ")
-e = input("Exact (type: e), At Most (type: m), At Least (type: l)?: ")
+e = input("Is P(X=x) (type: e), Is P(X≤x) (type: l), Is P(X≥x) (type: g)?: ")
 
 if e == 'e':
   x = input("Number of events within the sample size?: ")              # (max(0,n-(N+N1)) <= x <= min(n,N1)
   print("\nThe probability is: " + str(hypergeometric(N1, N2, n, x)))
 
-else:
+else:    # the CDF (Cumulative Distribution Function) solution
   probability_list = []
   first_value = int(input("Least number of events within the sample size?: "))
   last_value = int(input("Most number of events within the sample size?: "))
+  
   for i in range(first_value,last_value+1):
     p_x = hypergeometric(N1, N2, n, i)
     probability_list.append(p_x)
-
-  print("\nThe probability is: " + str(sum(probability_list)))
+  if e == 'g':
+    print("\nThe probability is: " + str(1 - sum(probability_list)))
+  else:
+    print("\nThe probability is: " + str(sum(probability_list)))
 
 mean = n*(N1/N)
 variance = n*((N-n)/(N-1))*(N1/N)*(N2/N)
@@ -180,21 +192,24 @@ def poisson(lambda1, x):
 
 "Inputs for variables"
 lambda1 = input("What is the constant rate of occurence?: )                 # lambda > 0
-e = input("Exact (type: e), At Most (type: m), At Least (type: l)?: ")
+e = input("Is P(X=x) (type: e), Is P(X≤x) (type: l), Is P(X≥x) (type: g)?: ")
 
 if e == 'e':
   x1 = input("Number of events (x) in that constant rate of occurence?: ")        #(x = 0,1,2,...)
   print("\nThe probability is: " + str(poisson(lambda1, x1)))
 
-else:
+else:        # the CDF (Cumulative Distribution Function) solution
   probability_list = []
   first_value = int(input("Least number of events?: "))
   last_value = int(input("Most number of events?: "))
+  
   for i in range(first_value,last_value+1):
     p_x = poisson(lambda1, i)
     probability_list.append(p_x)
-
-  print("\nThe probability is: " + str(sum(probability_list)))
+  if e == 'g':
+    print("\nThe probability is: " + str(1 - sum(probability_list)))
+  else:
+    print("\nThe probability is: " + str(sum(probability_list)))
 
 mean = lambda1
 variance = lambda1

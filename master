@@ -89,9 +89,9 @@ print(variance)
 "Geometric Distribution"
 
 def geometric1(x, p):
-    return p*((1-p)**(x-1))
+  return p*((1-p)**(x-1))
 
- def geometric2(y, p):
+def geometric2(y, p):
   return p*((1-p)**(y))
 
 "Inputs for variables"

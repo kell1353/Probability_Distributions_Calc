@@ -1,5 +1,8 @@
 import numpy as np
 
+# Reference Page for distributions: 
+# https://support.minitab.com/en-us/minitab/18/help-and-how-to/probability-distributions-and-random-data/how-to/probability-distributions/methods-and-formulas/methods-and-formulas/
+
 def C(n1,n2):
   return np.factorial(n1)/(np.factorial(n2)*np.factorial(n1-n2))
   
@@ -7,12 +10,12 @@ def C(n1,n2):
 
 ##########################################################################
 
-"Uniform Distribution"
+"Uniform Distribution"""
 
 def uniform(a,b):
   return 1/(b-a)                            # b > a
 
-"Inputs for variables"
+"""Inputs for variables"""
 a1 = input("What is the smallest endpoint value?: ")
 b1 = input("What is the largest endpoint value?: ")            
 
@@ -25,12 +28,12 @@ print("The variance is: " + str(variance))
 
 ##########################################################################
 
-"Binomial Distribution"
+"""Binomial Distribution"""
 
 def binomial(n, p, x):
   return C(n,x)*(p**(x))*((1-p)**(n-x))
 
-"Inputs for variables"
+"""Inputs for variables"""
 n1 = input("How many independent trials?: ")
 p1 = input("What is the probability of event?: ")
 e = input("Is P(X=x) (type: e), Is P(X≤x) (type: l), Is P(X≥x) (type: g)?: ")
@@ -39,7 +42,8 @@ if e == 'e':
   x1 = input("How many events (x) in the " + str(n1) + " independent trials?: ")                     #(x = 0,1,2,...,n)
   print("\nThe probability is: " + str(binomial(n1, p1, x1)))
 
-else:             # the CDF (Cumulative Distribution Function) solution
+# the CDF (Cumulative Distribution Function) solution
+else:             
   probability_list = []
   first_value = int(input("Least number of events?: "))
   last_value = int(input("Most number of events?: "))
@@ -59,34 +63,71 @@ print("The variance is: " + str(variance))
 
 ##########################################################################
 
-"Negative Binomial Distribution"
+"""Negative Binomial Distribution"""
 
 def negative_binomial1(r, x, p):
   return (C(x-1,r-1))*(p**r)*((1-p)**(x-r))
 
 def negative_binomial2(r, y, p):
   return (C(y+r-1,r-1))*(p**r)*((1-p)**(y))
-
-"Inputs for variables"
-r1 = input("Number of events ?: ")    
-x1 = input("Number of trials to produce r events?: ")                               #(x = r,r+1,r+2,...)
-y1 = input("Number of non-events that occur before you observe one events?: ")      #(y = 0,1,2,...)
+  
+"""Inputs for variables"""
 p1 = input("What is the probability of event?: ")
+r1 = input("Number of events you want to produce?: ")    
+e = input("Is P(X=x) (type: e), Is P(X≤x) (type: l), Is P(X≥x) (type: g)?: ")
+Q = input("If question is: Number of trials to produce r events? (x), or is: Number of non-events that occur before you observe the first r event? (y): ")
 
-print(str(negative_binomial1(r1, x1, p1)))
-mean = r1/p1
-variance = (r1*(1-p1))/p1**2
+if e == 'e' and Q == 'x':
+  x1 = input("Number of trials to produce r events?: ")                                 #(x = r,r+1,r+2,...)
+  print("\nThe probability is: " + str(negative_binomial1(r1, x1, p1)))
+  mean = r1/p1
+  variance = (r1*(1-p1))/p1**2
 
-print(str(negative_binomial2(r1, y1, p1)))
-mean = (r1*(1-p1))/p1
-variance = (r1*(1-p1))/p1**2
 
-print(mean)
-print(variance)
+if e == 'e' and Q == 'y':
+  y1 = input("Number of non-events that occur before you observe r events?: ")        #(y = 0,1,2,...)
+  print("\nThe probability is: " + str(negative_binomial2(r1, x1, p1)))
+  mean = (r1*(1-p1))/p1
+  variance = (r1*(1-p1))/p1**2
+  
+  
+# the CDF (Cumulative Distribution Function) solution  
+if (e == 'l' or e == 'g') and Q == 'x':
+  probability_list = []
+  first_value = int(input("Least number of events? (x > 0): "))                             
+  last_value = int(input("Most number of events? (x): "))
+  for i in range(first_value,last_value+1):
+    p_x = negative_binomial1(r1, i, p1)
+    probability_list.append(p_x)
+  if e == 'g':
+    print("\nThe probability is: " + str(1 - sum(probability_list)))
+  else:
+    print("\nThe probability is: " + str(sum(probability_list)))
+  mean = r1/p1
+  variance = (r1*(1-p1))/p1**2
+  
+  
+# the CDF (Cumulative Distribution Function) solution  
+if (e == 'l' or e == 'g') and Q == 'y':
+  probability_list = []
+  first_value = int(input("Least number of events?: "))
+  last_value = int(input("Most number of events?: "))
+  for i in range(first_value,last_value+1):
+    p_x = negative_binomial2(r1, i, p1)
+    probability_list.append(p_x)
+  if e == 'g':
+    print("\nThe probability is: " + str(1 - sum(probability_list)))
+  else:
+    print("\nThe probability is: " + str(sum(probability_list)))
+  mean = (r1*(1-p1))/p1
+  variance = (r1*(1-p1))/p1**2 
+
+print("The mean is: " + str(mean))
+print("The variance is: " + str(variance))
 
 ##########################################################################
 
-"Geometric Distribution"
+"""Geometric Distribution"""
 
 def geometric1(x, p):
   return p*((1-p)**(x-1))
@@ -94,21 +135,21 @@ def geometric1(x, p):
 def geometric2(y, p):
   return p*((1-p)**(y))
 
-"Inputs for variables"
+"""Inputs for variables"""
 p = input("What is the probability of event?: ")
 e = input("Is P(X=x) (type: e), Is P(X≤x) (type: l), Is P(X≥x) (type: g)?: ")
 Q = input("If question is: Number of trials to produce one event? (x), or is: Number of non-events that occur before you observe the first event? (y): ")
 
 if e == 'e' and Q == 'x':
   x = input("Number of trials to produce one event?: ")                                   #(x = 1,2,3,...)
-  print(str(geometric1(x,p)))
+  print("\nThe probability is: " + str(geometric1(y,p)))
   mean = 1/p
   variance = (1-p)/p**2
   
   
 if e == 'e' and Q == 'y':
   y = input("Number of non-events that occur before you observe the first event?: ")      #(y = 0,1,2,...)
-  print(str(geometric2(y,p)))
+  print("\nThe probability is: " + str(geometric2(y,p)))
   mean = (1-p)/p
   varaiance = (1-p)/p**2
   
@@ -149,12 +190,12 @@ print("The variance is: " + str(variance))
   
 ######################################################################### 
 
-"Hypergeometric Distribution"
+"""Hypergeometric Distribution"""
 
 def hypergeometric(N1, N2, n, x):
   return (C(N1, x)*C(N2, n-x))/C(N,n)
 
-"Inputs for variables"
+"""Inputs for variables"""
 N = input("Population size?: ")                                       # Population size
 N1 = input("Number of events in a population?: ")
 N2 = N-N1                                                             # Number of non-events in a population 
@@ -165,7 +206,8 @@ if e == 'e':
   x = input("Number of events within the sample size?: ")              # (max(0,n-(N+N1)) <= x <= min(n,N1)
   print("\nThe probability is: " + str(hypergeometric(N1, N2, n, x)))
 
-else:    # the CDF (Cumulative Distribution Function) solution
+# the CDF (Cumulative Distribution Function) solution
+else:    
   probability_list = []
   first_value = int(input("Least number of events within the sample size?: "))
   last_value = int(input("Most number of events within the sample size?: "))
@@ -185,12 +227,12 @@ print("The variance is: " + str(variance))
 
 ########################################################################
 
-"Poisson Distribution"
+"""Poisson Distribution"""
 
 def poisson(lambda1, x):
   return ((np.exp**(-lambda1))*(lambda1**x))/np.factorial(x)
 
-"Inputs for variables"
+"""Inputs for variables"""
 lambda1 = input("What is the constant rate of occurence?: )                 # lambda > 0
 e = input("Is P(X=x) (type: e), Is P(X≤x) (type: l), Is P(X≥x) (type: g)?: ")
 
@@ -198,7 +240,8 @@ if e == 'e':
   x1 = input("Number of events (x) in that constant rate of occurence?: ")        #(x = 0,1,2,...)
   print("\nThe probability is: " + str(poisson(lambda1, x1)))
 
-else:        # the CDF (Cumulative Distribution Function) solution
+# the CDF (Cumulative Distribution Function) solution
+else:        
   probability_list = []
   first_value = int(input("Least number of events?: "))
   last_value = int(input("Most number of events?: "))

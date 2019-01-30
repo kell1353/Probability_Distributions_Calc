@@ -6,13 +6,17 @@ import numpy as np
 def C(n1,n2):
   return np.factorial(n1)/(np.factorial(n2)*np.factorial(n1-n2))
   
+################################################################################################################
+################################################################################################################
+  
 """"""""""""""""Discrete Distributions"""""""""""""""""""
 
-##########################################################################
+################################################################################################################
+################################################################################################################
 
 "Uniform Distribution"""
 
-def uniform(a,b):
+def uniform_discrete(a,b):
   return 1/(b-a)                            # b > a
 
 """Inputs for variables"""
@@ -22,7 +26,7 @@ b1 = input("What is the largest endpoint value?: ")
 mean = (a1+b1)/2
 variance = ((b1-a1)**2)/12
 
-print("\nThe probability is: " + str(uniform(a1,b1)))
+print("\nThe probability is: " + str(uniform_discrete(a1,b1)))
 print("The mean is: " + str(mean))
 print("The variance is: " + str(variance))
 
@@ -36,7 +40,7 @@ def binomial(n, p, x):
 """Inputs for variables"""
 n1 = input("How many independent trials?: ")
 p1 = input("What is the probability of event?: ")
-e = input("Is P(X=x) (type: e), Is P(X≤x) (type: l), Is P(X≥x) (type: g)?: ")
+e = input("Is P(X = x) (type: e), Is P(X ≤ x) (type: l), Is P(X ≥ x) (type: g)?: ")
 
 if e == 'e':
   x1 = input("How many events (x) in the " + str(n1) + " independent trials?: ")                     #(x = 0,1,2,...,n)
@@ -45,10 +49,10 @@ if e == 'e':
 # the CDF (Cumulative Distribution Function) solution
 else:             
   probability_list = []
-  first_value = int(input("Least number of events?: "))
-  last_value = int(input("Most number of events?: "))
+  lower_endpoint = int(input("Least number of events?: "))
+  upper_endpoint = int(input("Most number of events?: "))
   
-  for i in range(first_value,last_value+1):
+  for i in range(lower_endpoint,upper_endpoint+1):
     p_x = binomial(n1,p1,i)
     probability_list.append(p_x)
   if e == 'g':
@@ -74,7 +78,7 @@ def negative_binomial2(r, y, p):
 """Inputs for variables"""
 p1 = input("What is the probability of event?: ")
 r1 = input("Number of events you want to produce?: ")    
-e = input("Is P(X=x) (type: e), Is P(X≤x) (type: l), Is P(X≥x) (type: g)?: ")
+e = input("Is P(X = x) (type: e), Is P(X ≤ x) (type: l), Is P(X ≥ x) (type: g)?: ")
 Q = input("If question is: Number of trials to produce r events? (x), or is: Number of non-events that occur before you observe the first r event? (y): ")
 
 if e == 'e' and Q == 'x':
@@ -94,9 +98,9 @@ if e == 'e' and Q == 'y':
 # the CDF (Cumulative Distribution Function) solution  
 if (e == 'l' or e == 'g') and Q == 'x':
   probability_list = []
-  first_value = int(input("Least number of events? (x > 0): "))                             
-  last_value = int(input("Most number of events? (x): "))
-  for i in range(first_value,last_value+1):
+  lower_endpoint = int(input("Least number of events? (x > 0): "))                             
+  upper_endpoint = int(input("Most number of events? (x): "))
+  for i in range(lower_endpoint,upper_endpoint+1):
     p_x = negative_binomial1(r1, i, p1)
     probability_list.append(p_x)
   if e == 'g':
@@ -110,9 +114,9 @@ if (e == 'l' or e == 'g') and Q == 'x':
 # the CDF (Cumulative Distribution Function) solution  
 if (e == 'l' or e == 'g') and Q == 'y':
   probability_list = []
-  first_value = int(input("Least number of events?: "))
-  last_value = int(input("Most number of events?: "))
-  for i in range(first_value,last_value+1):
+  lower_endpoint = int(input("Least number of events?: "))
+  upper_endpoint = int(input("Most number of events?: "))
+  for i in range(lower_endpoint,upper_endpoint+1):
     p_x = negative_binomial2(r1, i, p1)
     probability_list.append(p_x)
   if e == 'g':
@@ -137,7 +141,7 @@ def geometric2(y, p):
 
 """Inputs for variables"""
 p = input("What is the probability of event?: ")
-e = input("Is P(X=x) (type: e), Is P(X≤x) (type: l), Is P(X≥x) (type: g)?: ")
+e = input("Is P(X = x) (type: e), Is P(X ≤ x) (type: l), Is P(X ≥ x) (type: g)?: ")
 Q = input("If question is: Number of trials to produce one event? (x), or is: Number of non-events that occur before you observe the first event? (y): ")
 
 if e == 'e' and Q == 'x':
@@ -157,9 +161,9 @@ if e == 'e' and Q == 'y':
 # the CDF (Cumulative Distribution Function) solution  
 if (e == 'l' or e == 'g') and Q == 'x':
   probability_list = []
-  first_value = int(input("Least number of events? (x > 0): "))                             
-  last_value = int(input("Most number of events? (x): "))
-  for i in range(first_value,last_value+1):
+  lower_endpoint = int(input("Least number of events? (x > 0): "))                             
+  upper_endpoint = int(input("Most number of events? (x): "))
+  for i in range(lower_endpoint,upper_endpoint+1):
     p_x = geometric1(i,p)
     probability_list.append(p_x)
   if e == 'g':
@@ -173,13 +177,14 @@ if (e == 'l' or e == 'g') and Q == 'x':
 # the CDF (Cumulative Distribution Function) solution  
 if (e == 'l' or e == 'g') and Q == 'y':
   probability_list = []
-  first_value = int(input("Least number of events?: "))
-  last_value = int(input("Most number of events?: "))
-  for i in range(first_value,last_value+1):
+  lower_endpoint = int(input("Least number of events?: "))
+  upper_endpoint = int(input("Most number of events?: "))
+  for i in range(lower_endpoint,upper_endpoint+1):
     p_x = geometric2(i,p)
     probability_list.append(p_x)
   if e == 'g':
     print("\nThe probability is: " + str(1 - sum(probability_list)))
+    
   else:
     print("\nThe probability is: " + str(sum(probability_list)))
   mean = (1-p)/p
@@ -200,7 +205,7 @@ N = input("Population size?: ")                                       # Populati
 N1 = input("Number of events in a population?: ")
 N2 = N-N1                                                             # Number of non-events in a population 
 n = input("Sample size?: ")
-e = input("Is P(X=x) (type: e), Is P(X≤x) (type: l), Is P(X≥x) (type: g)?: ")
+e = input("Is P(X = x) (type: e), Is P(X ≤ x) (type: l), Is P(X ≥ x) (type: g)?: ")
 
 if e == 'e':
   x = input("Number of events within the sample size?: ")              # (max(0,n-(N+N1)) <= x <= min(n,N1)
@@ -209,15 +214,16 @@ if e == 'e':
 # the CDF (Cumulative Distribution Function) solution
 else:    
   probability_list = []
-  first_value = int(input("Least number of events within the sample size?: "))
-  last_value = int(input("Most number of events within the sample size?: "))
+  lower_endpoint = int(input("Least number of events within the sample size?: "))
+  upper_endpoint = int(input("Most number of events within the sample size?: "))
   
-  for i in range(first_value,last_value+1):
+  for i in range(lower_endpoint,upper_endpoint+1):
     p_x = hypergeometric(N1, N2, n, i)
     probability_list.append(p_x)
+    
   if e == 'g':
     print("\nThe probability is: " + str(1 - sum(probability_list)))
-  else:
+  if e == 'l':
     print("\nThe probability is: " + str(sum(probability_list)))
 
 mean = n*(N1/N)
@@ -234,7 +240,7 @@ def poisson(lambda1, x):
 
 """Inputs for variables"""
 lambda1 = input("What is the constant rate of occurence?: )                 # lambda > 0
-e = input("Is P(X=x) (type: e), Is P(X≤x) (type: l), Is P(X≥x) (type: g)?: ")
+e = input("Is P(X = x) (type: e), Is P(X ≤ x) (type: l), Is P(X ≥ x) (type: g)?: ")
 
 if e == 'e':
   x1 = input("Number of events (x) in that constant rate of occurence?: ")        #(x = 0,1,2,...)
@@ -243,18 +249,101 @@ if e == 'e':
 # the CDF (Cumulative Distribution Function) solution
 else:        
   probability_list = []
-  first_value = int(input("Least number of events?: "))
-  last_value = int(input("Most number of events?: "))
+  lower_endpoint = int(input("Least number of events?: "))
+  upper_endpoint = int(input("Most number of events?: "))
   
-  for i in range(first_value,last_value+1):
+  for i in range(lower_endpoint,upper_endpoint+1):
     p_x = poisson(lambda1, i)
     probability_list.append(p_x)
+    
   if e == 'g':
     print("\nThe probability is: " + str(1 - sum(probability_list)))
-  else:
+  if e == 'l':
     print("\nThe probability is: " + str(sum(probability_list)))
 
 mean = lambda1
 variance = lambda1
 print("The mean is: " + str(mean))
 print("The variance is: " + str(variance)) 
+
+
+################################################################################################################
+################################################################################################################
+
+""""""""""""""""Continuous Distributions"""""""""""""""""""
+
+################################################################################################################
+################################################################################################################
+
+"""Uniform Distribution"""
+
+def uniform_cont(x, a, b):
+  return (x - a)/(b - a)
+
+"""Inputs for variables"""
+e = input("Is (X ≤ x) (type: l), or P(a ≤ X ≤ b) (type: b), or P(X ≥ x) (type: g)?: ")
+lower_endpoint = int(input("Lower endpoint of uniform range (a)?: "))
+upper_endpoint = int(input("Upper endpoint of uniform range (b)?: "))
+
+# the CDF (Cumulative Distribution Function) solution
+if e == 'b':
+  lower_endpoint_x = int(input("Lower endpoint of x time range?: "))
+  upper_endpoint_x = int(input("Upper endpoint of x time range?: "))
+  p_x = uniform_cont(upper_endpoint_x, lower_endpoint, upper_endpoint) - uniform_cont(lower_endpoint_x, lower_endpoint, upper_endpoint)
+  print("\nThe probability is: " + str(p_x))
+  
+if e == 'g':
+  x1 = input("What is the time we need to wait before a given event occurs?: ")        # (x > 0)
+  print("\nThe probability is: " + str(1 - uniform_cont(x1, lower_endpoint, upper_endpoint)))
+  
+if e == 'l':  
+  x1 = input("What is the time we need to wait before a given event occurs?: ")        # (x > 0)
+  print("\nThe probability is: " + str(uniform_cont(x1, lower_endpoint, upper_endpoint)))
+  
+mean = (lower_endpoint + upper_endpoint)/2
+variance = ((upper_endpoint - lower_endpoint)**2)/12
+print("The mean is: " + str(mean))
+print("The variance is: " + str(variance))   
+  
+#########################################################################
+
+"""Exponential Distribution"""
+
+def exponential(lambda1, x):
+  return (1 - np.exp((-lambda1)*x))
+
+"""Inputs for variables"""
+lambda1 = input("What is the constant rate of occurence (lambda)?: )                 # lambda > 0
+e = input("Is P(X = x) (type: e), or P(a ≤ X ≤ b) (type: b), or P(X ≥ x) (type: g)?: ")
+
+if e == 'e':
+  x1 = input("What is the time we need to wait before a given event occurs?: ")        # (x > 0)
+  print("\nThe probability is: " + str(exponential(lambda1, x1)))
+
+# the CDF (Cumulative Distribution Function) solution
+else:        
+  if e == 'g':
+    lower_endpoint = 0
+    upper_endpoint = int(input("Least amount of time?: "))
+    p_x = exponential(lambda1, upper_endpoint) - exponential(lambda1, lower_endpoint)
+    print("\nThe probability is: " + str(1 - p_x))
+    
+  if e == 'b':
+    lower_endpoint = int(input("Least amount of time (a)?: "))
+    upper_endpoint = int(input("Most amount of time (b)?: "))
+    p_x = exponential(lambda1, upper_endpoint) - exponential(lambda1, lower_endpoint)
+    print("\nThe probability is: " + str(p_x))
+
+mean = 1/lambda1
+variance = 1/lambda1**2
+print("The mean is: " + str(mean))
+print("The variance is: " + str(variance)) 
+
+
+######################################################################### 
+
+"""Normal Distribution"""
+
+######################################################################### 
+
+"""Gamma Distribution"""
